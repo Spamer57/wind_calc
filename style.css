@@ -1,0 +1,384 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.calculator-container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #DCDCDC;
+}
+
+.tab-btn.active {
+    background-color: #D13D73;
+    color: white;
+}
+
+.window-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.left-section,
+.right-section {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+}
+
+.left-section label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.left-section input,
+.left-section select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.left-section button {
+    padding: 5px 10px;
+    background-color: #D13D73;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.window-preview {
+    text-align: center;
+}
+
+#window-drawing {
+    width: 200px;
+    height: 300px;
+    border: 1px solid #ccc;
+    position: relative;
+    margin: 20px auto;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+#window-drawing::before,
+#window-drawing::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 90%;
+    border: 2px dashed #007bff;
+    pointer-events: none;
+}
+
+#window-drawing div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #007bff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#dimensions-text {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.right-section h3 {
+    margin-bottom: 10px;
+}
+
+.right-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.right-section li {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.right-section #total-cost {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.right-section button {
+    padding: 5px 10px;
+    background-color: #D13D73;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+#saved-calculations {
+    margin-top: 20px;
+}
+
+.saved-calculation {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.saved-calculation span {
+    margin-right: 10px;
+}
+
+.saved-calculation button {
+    background-color: #D13D73;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.saved-calculation button:hover {
+    background-color: #b82e5e;
+}
+
+/* Стили для изображения окна */
+#window-image {
+    display: block;
+    margin: 0 auto;
+    /*border: 2px solid #007bff;*/
+}
+
+	/* Стили для контейнера сохраненных расчетов */
+.saved-calculations-container {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9; /* Опционально: фоновый цвет */
+    border: 1px solid #ddd; /* Опционально: граница */
+}
+
+.saved-calculations-container .saved-calculation {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.saved-calculations-container .saved-calculation span {
+    margin-right: 10px;
+}
+
+.saved-calculations-container .saved-calculation button {
+    background-color: #D13D73;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.saved-calculations-container .saved-calculation button:hover {
+    background-color: #b82e5e;
+}
+	
+/* Стили для ползунков */
+.slider-container {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.slider-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.slider-container input[type="range"] {
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+.slider-container span {
+    font-weight: bold;
+}
+
+.bottom-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 20px auto 20px auto;
+    padding: 30px 0;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    max-width: 900px;
+    width: 100%;
+}
+
+.bottom-buttons button {
+    background-color: #D13D73;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 18px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.bottom-buttons button:hover {
+    background-color: #b82e5e;
+}
+
+.right-section input,
+.right-section progress,
+.right-section meter,
+.saved-calculations-container input,
+.saved-calculations-container progress,
+.saved-calculations-container meter {
+    display: none !important;
+}
+
+.saved-calculations-container:empty {
+    border: none;
+    background: transparent;
+    padding: 0;
+    min-height: 0;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background: rgba(0,0,0,0.4);
+}
+.modal-content {
+  background: #fff;
+  margin: 60px auto;
+  padding: 30px 30px 20px 30px;
+  border-radius: 10px;
+  max-width: 400px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  position: relative;
+}
+.close-modal {
+  position: absolute;
+  right: 18px;
+  top: 10px;
+  font-size: 28px;
+  color: #D13D73;
+  cursor: pointer;
+}
+#order-form label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+#order-form input[type="text"],
+#order-form input[type="tel"],
+#order-form input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+#order-form button[type="submit"] {
+  background: #D13D73;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+#order-form button[type="submit"]:hover {
+  background: #b82e5e;
+}
+
+/* Стили для контейнера с расчетами */
+#saved-calculations {
+  margin-top: 20px; /* Верхний отступ */
+  margin-bottom: 20px; /* Нижний отступ */
+  padding: 10px; /* Внутренние отступы */
+  border: 1px solid #ccc; /* Добавляем границу для визуализации */
+  text-align: center; /* Центрируем текст */
+}
+
+/* Стили для сообщения "Нет сохраненных расчетов" */
+#saved-calculations p {
+  margin: 0;
+}
+/* Стили для верхнего контейнера с кнопками */
+.button-group-top {
+  display: flex; /* Размещаем кнопки в строку */
+  gap: 5px; /* Отступ между кнопками */
+}
+
+/* Стили для верхних кнопок */
+.top-button {
+  width: 50%; /* Каждая кнопка занимает 50% ширины */
+  padding: 10px; /* Внутренние отступы */
+  background-color: #D13D73; /* Цвет фона */
+  color: white; /* Цвет текста */
+  border: none; /* Убираем границу */
+  cursor: pointer; /* Изменяем курсор при наведении */
+  font-size: 18px; /* Размер шрифта */
+  box-sizing: border-box; /* Учитываем padding в ширину */
+}
+
+.top-button:hover {
+  background-color: #b82e5e; /* Цвет фона при наведении */
+}
+
+/* Стили для нижней кнопки */
+#proceed-to-order-btn {
+  width: 100%; /* Занимает всю ширину блока */
+  padding: 5px; /* Внутренние отступы */
+  background-color: #D13D73; /* Цвет фона */
+  color: white; /* Цвет текста */
+  border: none; /* Убираем границу */
+  cursor: pointer; /* Изменяем курсор при наведении */
+  font-size: 18px; /* Размер шрифта */
+  text-align: center; /* Выравнивание текста по центру */
+  margin-top: 5px; /* Отступ сверху */
+}
+
+#proceed-to-order-btn:hover {
+  background-color: #b82e5e; /* Цвет фона при наведении */
+}
