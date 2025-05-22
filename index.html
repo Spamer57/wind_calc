@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans :wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Подключение html2canvas -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "KapwpG4JS2mrDWTVE",
+      });
+   })();
+</script>
+
+    <title>Калькулятор окон</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator-container" role="main">
+        <h1>Калькулятор окон</h1>
+
+        <!-- Типы окон -->
+        <div class="tabs" role="tablist">
+          <button class="tab-btn active" role="tab" data-tab-id="single">Одностворчатые окна</button>
+          <button class="tab-btn" role="tab" data-tab-id="double">Двухстворчатые окна</button>
+          <button class="tab-btn" role="tab" data-tab-id="triple">Трехстворчатые окна</button>
+          <button class="tab-btn" role="tab" data-tab-id="balcony">Балконные двери</button>
+</div>
+
+        <!-- Параметры окна -->
+        <div class="window-details" role="region" aria-labelledby="window-details-title">
+            <div class="left-section">
+                <label for="width">Ширина окна:</label>
+                <input type="number" id="width" placeholder="Введите ширину в мм" required min="500">
+                
+                <label for="height">Высота окна:</label>
+                <input type="number" id="height" placeholder="Введите высоту в мм" required min="500">
+                
+                <label for="opening-type">Тип открывания:</label>
+<select id="opening-type">
+    <option value="fixed">Глухое</option>
+    <option value="turn">Поворотное</option>
+    <option value="turn-tilt">Поворотно-откидное</option>
+</select>
+
+                <label for="profile-model">Модель профиля:</label>
+                <select id="profile-model">
+                    <option value="blitz">Blitz (60 мм)</option>
+                    <option value="comfort">Comfort (70 мм)</option>
+                    <option value="premium">Premium (90 мм)</option>
+                </select>
+
+                <label for="glazing-type">Стеклопакет:</label>
+                <select id="glazing-type">
+                    <option value="2-chamber">2-камерный</option>
+                    <option value="3-chamber">3-камерный</option>
+                    <option value="4-chamber">4-камерный</option>
+                </select>
+
+                <button onclick="calculateCost()">Рассчитать стоимость</button>
+            </div>
+
+            <!-- Визуализация окна -->
+            <div class="window-image">
+                <div class="image-wrapper"> <!-- Новый контейнер -->
+                <img id="window-image" src="https://calc.vipdomstr.ru/wp-content/uploads/2025/05/3.webp" alt="Пластиковое окно">
+                </div>
+                <div class="slider-container">
+        <!-- Ползунок для ширины -->
+        <label for="width-slider">Ширина:</label>
+        <input type="range" id="width-slider" min="300" max="5000" step="10" value="1500">
+        <span id="width-value">1500 мм</span>
+        
+        <br> <!-- Перенос строки -->
+
+        <!-- Ползунок для высоты -->
+        <label for="height-slider">Высота:</label>
+        <input type="range" id="height-slider" min="300" max="4000" step="10" value="2000">
+        <span id="height-value">2000 мм</span>
+    </div>
+    <p id="dimensions-text"></p>
+</div>
+
+            <!-- Результаты расчета -->
+            <div class="right-section">
+                
+                <div id="cost-details-container">
+                  <h3>Стоимость комплектующих:</h3>
+                  <ul id="cost-details">
+                    <!-- Здесь будут отображаться детали стоимости -->
+                  </ul>
+                  <p id="cost-placeholder">Для отображения стоимости укажите размеры и сделайте расчет стоимости</p>
+                </div>
+                  <h3>Общая стоимость: <span id="total-cost">0 руб.</span></h3>
+                  <button id="proceed-to-order-btn">Оформить заказ</button>
+                 <button onclick="saveCalculation()" id="save-calculation-btn">Сохранить расчет</button>
+                </div>
+        </div>
+        <!-- Блок сохранённых расчётов теперь ниже кнопок -->
+        <div id="saved-calculations" class="saved-calculations-container">
+            <!-- Здесь будут отображаться сохраненные расчеты -->
+        </div><button id="download-png-btn" class="download-button">Скачать расчет</button>
+    </div>
+    <!-- Модальное окно заявки -->
+    <div id="order-modal" class="modal" style="display:none;">
+      <div class="modal-content">
+        <span class="close-modal" id="close-order-modal">&times;</span>
+        <h2>Сделать заказ</h2>
+        <form id="order-form" enctype="multipart/form-data" autocomplete="off">
+          <label for="client-name">Имя <span style="color:red">*</span></label>
+          <input type="text" id="client-name" name="client-name" required>
+
+          <label for="client-phone">Телефон <span style="color:red">*</span></label>
+          <input type="tel" id="client-phone" name="client-phone" required pattern="[+0-9\-() ]{7,20}">
+
+          <p>Все ваши сохранённые расчеты будут отправлены в заявке.</p>
+          
+          <div class="form-actions">
+            <button type="submit">Отправить заявку</button>
+            <div id="loading-spinner" class="loading-spinner" style="display: none;">
+              <div class="spinner"></div>
+            </div>
+          </div>
+
+        </form>
+    <div id="order-form-success" style="display:none;color:green;margin-top:10px;">Заявка успешно отправлена!</div>
+  </div>
+</div>
+    <script src="script.js"></script>
+</body>
+</html>
